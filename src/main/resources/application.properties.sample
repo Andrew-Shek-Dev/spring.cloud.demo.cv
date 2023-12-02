@@ -1,0 +1,17 @@
+### Spring Cloud Config (avoid an auto-generated password on every application restart) ###
+server.port=
+spring.cloud.config.server.git.uri=
+spring.cloud.config.server.git.clone-on-start=true
+spring.security.user.name=
+spring.security.user.password=
+
+### Keystore Config ###
+encrypt.keyStore.location=classpath:/config-server.jks
+encrypt.keyStore.password=
+encrypt.keyStore.alias=config-server-key
+encrypt.keyStore.secret=
+env.profile=development
+
+
+# spring.cloud.config.server.encrypt.enabled=false
+# env.profile=production

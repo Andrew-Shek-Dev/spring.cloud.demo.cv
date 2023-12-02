@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring_hello_world
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mybatis
+    username: mybatis_adminp
+    password: 123456

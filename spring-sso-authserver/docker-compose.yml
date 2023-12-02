@@ -1,0 +1,32 @@
+version: '3'
+services:
+  keycloak_db:
+    container_name: 'keycloak_db'
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+  web:
+    container_name: 'tecky-keycloak'
+    build: ./
+    image: tecky-keycloak-server:latest
+    environment:
+      KEYCLOAK_ADMIN_USER: ${KEYCLOAK_ADMIN_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - keycloak_db
+    env_file:
+      - .env
+volumes:
+  pgdata:
